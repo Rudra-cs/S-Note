@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         for (Notes nt : notes) {
             String log = "Title: " + nt.getTitle() + " ,SubTitle: " + nt.getSubTitle() + " ,NoteText: " +
                     nt.getNoteText();
-            // Writing Contacts to log
+            // Notes to log
             Log.d("NOTES: ", log);
         }
     }
