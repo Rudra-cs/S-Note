@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.rudra.snote.model.Notes;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_AND_NOTE = 1;
@@ -15,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DbHelper dbHelper = new DbHelper(this);
 
         ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);
         imageAddNoteMain.setOnClickListener(new View.OnClickListener() {
@@ -25,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
-
+        ArrayList<Notes> notes = dbHelper.getAllNotes();
+        for (Notes nt : notes) {
+            String log = "Title: " + nt.getTitle() + " ,SubTitle: " + nt.getSubTitle() + " ,NoteText: " +
+                    nt.getNoteText();
+            // Writing Contacts to log
+            Log.d("NOTES: ", log);
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.rudra.snote;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.rudra.snote.model.Notes;
+
+import java.util.ArrayList;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -45,5 +48,30 @@ public class DbHelper extends SQLiteOpenHelper {
         database.insert(TABLE_NAME,null,contentValues);
         Log.d("dbrudra","successfully Inserted");
         database.close();
+    }
+
+    public ArrayList<Notes> getAllNotes() {
+        ArrayList<Notes> notesList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Notes notes = new Notes();
+                notes.setTitle(cursor.getString(1));
+                notes.setSubTitle(cursor.getString(2));
+                notes.setNoteText(cursor.getString(3));
+                // Adding contact to list
+                notesList.add(notes);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        // return contact list
+        return notesList;
     }
 }

@@ -1,5 +1,4 @@
 package com.rudra.snote.model;
-;
 
 import java.io.Serializable;
 
