@@ -1,5 +1,7 @@
 package com.rudra.snote.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Notes implements Serializable {
@@ -68,6 +70,12 @@ public class Notes implements Serializable {
     public void setWebLink(String webLink) {
         this.webLink = webLink;
     }
+
+//    @NonNull
+//    @Override
+//    public String toString() {
+//        return title + " : " + dateTime;
+//    }
 
 }
 

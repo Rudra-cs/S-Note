@@ -64,13 +64,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 notes.setTitle(cursor.getString(1));
                 notes.setSubTitle(cursor.getString(2));
                 notes.setNoteText(cursor.getString(3));
-                // Adding contact to list
+
                 notesList.add(notes);
             } while (cursor.moveToNext());
         }
         cursor.close();
 
-        // return contact list
+
         return notesList;
     }
 }

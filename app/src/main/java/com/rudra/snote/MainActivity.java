@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             // Notes to log
             Log.d("NOTES: ", log);
         }
+//        Log.d("NOTES",notes.toString());
     }
 
 }
