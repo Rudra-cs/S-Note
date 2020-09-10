@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Notes implements Serializable {
 
+    private String Id;
     private String title;
     private String subTitle;
     private String noteText;
@@ -71,7 +72,15 @@ public class Notes implements Serializable {
         this.webLink = webLink;
     }
 
-//    @NonNull
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    //    @NonNull
 //    @Override
 //    public String toString() {
 //        return title + " : " + dateTime;

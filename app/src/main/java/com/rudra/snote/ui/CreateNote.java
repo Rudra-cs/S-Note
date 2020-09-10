@@ -1,16 +1,17 @@
-package com.rudra.snote;
+package com.rudra.snote.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rudra.snote.DbHelper.DbHelper;
+import com.rudra.snote.R;
 import com.rudra.snote.model.Notes;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +21,7 @@ import java.util.Locale;
 public class CreateNote extends AppCompatActivity {
 
     private EditText inputNoteTitle,inputNoteSubtitle,inputNoteText;
-    private TextView textDataTime;
+    private TextView textDateTime;
     ImageView imageBack;
     private DbHelper dbHelper;
     @Override
@@ -39,9 +40,9 @@ public class CreateNote extends AppCompatActivity {
         inputNoteTitle = findViewById(R.id.inputNoteTitle);
         inputNoteSubtitle = findViewById(R.id.inputNoteSubtitle);
         inputNoteText = findViewById(R.id.inputNote);
-        textDataTime = findViewById(R.id.textDateTime);
+        textDateTime = findViewById(R.id.textDateTime);
 
-        textDataTime.setText(
+        textDateTime.setText(
                 new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
                         .format(new Date())
         );
@@ -66,13 +67,18 @@ public class CreateNote extends AppCompatActivity {
         }
 
         final Notes notes = new Notes();
-        inputNoteTitle.setText(inputNoteText.getText().toString());
+        inputNoteTitle.setText(inputNoteTitle.getText().toString());
         inputNoteSubtitle.setText(inputNoteSubtitle.getText().toString());
+        textDateTime.setText(textDateTime.getText().toString());
         inputNoteText.setText(inputNoteText.getText().toString());
-        textDataTime.setText(textDataTime.getText().toString());
+
+        notes.setTitle(inputNoteTitle.getText().toString());
+        notes.setSubTitle(inputNoteSubtitle.getText().toString());
+        notes.setDateTime(textDateTime.getText().toString());
+        notes.setNoteText(inputNoteText.getText().toString());
 
         dbHelper.insertDataToDatabase(dbHelper.getWritableDatabase(),notes);
-        Log.d("insert","Insertion Successful");
+
         Intent intent = new Intent();
         setResult(RESULT_OK,intent);
         finish();
